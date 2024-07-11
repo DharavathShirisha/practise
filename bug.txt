@@ -1,0 +1,123 @@
+
+
+CREATE TABLE Students(STUDENT_ID int PRIMARY KEY identity(1,1),
+First_name varchar(30) not null,
+Last_name varchar(30)not null,
+DOB date,
+Address varchar(10) not null,
+Email varchar(90)unique not null,
+phone bigint 
+);
+INSERT INTO Students VALUES( "DHARAVATH","SHIRISHA", "03-AUG-2000", "HYD","DHARAVATH.SHIRISHA@MPHASIS.COM",26514516);
+INSERT INTO Students VALUES( "DHARAVATH","MARUTHI", "18-SEP-200","HYD", "DHARAVATH.MARUTHI@GMAIL.COM",32165446);
+INSERT INTO Students VALUES( "DHARAVATH","SUMITRA", "03-AUG-20005","HYD", "DHARAVATH.SUMITRA@MPHASIS.COM",56545446);
+INSERT INTO Students VALUES("maitry","singh","05-18-2004","gurugram","maitry.singh@mphasi",92165562);
+INSERT INTO Students VALUES("keerthi","suresh","12-03-1689", "jarkhan",'keerthi.suersh',2545646564)
+SELECT * FROM  Students;
+
+ 
+ 
+ 
+CREATE TABLE Courses(
+C_ID INT PRIMARY KEY  identity(1,1),C_NAME VARCHAR(30),INSTRUCTOR_NAME VARCHAR(30)
+);
+INSERT INTO Courses VALUES("PYHTON","ALBERT");
+INSERT INTO Courses VALUES("DOT NET","GELILEO")
+INSERT INTO Courses VALUES("java","sir")
+INSERT INTO Courses VALUES("devops","thomas")
+INSERT INTO Courses VALUES("data science","willams")
+
+SELECT * FROM Courses;
+
+
+
+ CREATE TABLE Enrolments (
+ Enrolment_id INT PRIMARY KEY identity(1,1), 
+ Enrolment_date date not null,
+ STUDENT_ID int foreign KEY references Students (STUDENT_ID) ON DELETE CASCADE,
+ C_ID int foreign KEY references Courses (C_ID) ON UPDATE CASCADE);
+ 
+ INSERT INTO Enrolments VALUES("03-MAY-2005",1,1);
+ INSERT INTO Enrolments VALUES("03-MAY-2005",2,2);
+ INSERT INTO Enrolments VALUES("03-MAY-2005",3,3);
+ INSERT INTO Enrolments VALUES("03-MAY-2005",4,4);
+ INSERT INTO Enrolments VALUES("03-MAY-2005",5,5);
+ SELECT * FROM Enrolments;
+ 
+ 
+ 
+ 
+ CREATE TABLE Grades(
+ Grade_id int PRIMARY KEY identity(1,1),
+ grade varchar(20) check (grade IN ('A','B','C','D','PASS'))  --CHECK CONSTRAINT
+ default 'PASS',                                            -- ITS AN DEFALUT VALUE EVERY time
+ grade_date DATE NOT NULL,
+ STUDENT_ID int foreign key references Students (STUDENT_ID),
+ C_ID int foreign key references Courses (C_ID)
+ );
+ 
+INSERT into Grades values (default,"02-jan-1992",1,1);
+INSERT into Grades values ('B',"02-jan-1992",2,2);
+INSERT into Grades values (default,"02-jan-1992",3,3);
+INSERT into Grades values ('D',"02-jan-1992",4,4);
+INSERT into Grades values ('A',"02-jan-1992",5,5);
+
+
+SELECT * from Grades;
+
+
+CREATE table Attendance(
+Attendance_id int PRIMARY key identity(1,1),
+Attendance_date date not null,
+status varchar(20) check (status in ("Present","Absent"))
+default 'Present',
+STUDENT_ID int foreign key references Students (STUDENT_ID),
+C_ID int foreign key references Courses (C_ID)
+)
+INSERT into Attendance values ("28-nov-1654","Absent",1,1);
+INSERT into Attendance values ("02-jan-1992",default,2,2);
+INSERT into Attendance values ("02-jan-1992",default,3,3);
+INSERT into Attendance values ("02-jan-1992",default,4,4);
+INSERT into Attendance values ("02-jan-1992","Absent",5,5);
+SELECT * from Attendance;
+
+CREATE table Fees (
+Fee_id int primary key identity(1,1),
+Amount decimal(10,2) not null,
+Paymenyt_date date,
+STUDENT_ID int foreign key references Students (STUDENT_ID))
+INSERT into Fees values(122435.00,"03/08/2000",1);
+INSERT into Fees values(122435.30,"03/08/2004",1);
+INSERT into Fees values(122435.00,"03/08/2009",1);
+INSERT into Fees values(122435.00,"03/08/2001",1);
+INSERT into Fees values(122435.00,"03/08/2005",1);
+
+SELECT * from Fees;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
